@@ -1,0 +1,126 @@
+<div>
+  <h2>Familielid aanpassen</h2>
+  <form class="example-form" [formGroup]="editFamily">
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             formControlName="personToEdit"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="fillInformation(option)">
+          {{option.firstname + ' ' + option.lastname + '| geboren: ' + option.birthDate + ' | gemaakt: ' + option.creationDate}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Voornaam</mat-label>
+      <input matInput placeholder="Een voornaam" formControlName="firstname">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Achternaam</mat-label>
+      <input matInput placeholder="Een achternaam" formControlName="lastname">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Roepnaam</mat-label>
+      <input matInput placeholder="Een roepnaam" formControlName="nickname">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Geboortedatum</mat-label>
+      <input matInput placeholder="DD/MM/YYYY" formControlName="birthDate">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Overlijdingsdatum</mat-label>
+      <input matInput placeholder="DD/MM/YYYY" formControlName="deathDate">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Opleiding</mat-label>
+      <input matInput placeholder="Een opleiding" formControlName="education">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Beroep</mat-label>
+      <input matInput placeholder="Een beroep" formControlName="profession">
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Geslacht" formControlName="gender">
+      <mat-radio-button value="Man">Man</mat-radio-button>
+      <mat-radio-button value="Vrouw">Vrouw</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Meisjesnaam</mat-label>
+      <input matInput placeholder="Meisjesnaam" formControlName="maidenName">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Partner</mat-label>
+      <mat-select formControlName="partner" [compareWith]="compareCategoryObjects">
+        <div *ngFor="let person of persons">
+          <mat-option [value]="person">
+            {{person.firstname + ' ' +  person.lastname + ' | ' + person.birthDate}}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Vader</mat-label>
+      <mat-select formControlName="father" [compareWith]="compareCategoryObjects">
+        <div *ngFor="let person of persons">
+          <mat-option [value]="person" *ngIf="person.gender == 'Man'">
+            {{person.firstname + ' ' +  person.lastname + ' | ' + person.birthDate}}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Moeder</mat-label>
+      <mat-select formControlName="mother" [compareWith]="compareCategoryObjects">
+        <div *ngFor="let person of persons">
+          <mat-option [value]="person" *ngIf="person.gender == 'Vrouw'">
+            {{person.firstname + ' ' +  person.lastname + ' | ' + person.birthDate}}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Stiefvader(s)</mat-label>
+      <mat-select multiple formControlName="stepfathers" [compareWith]="compareCategoryObjects">
+        <div *ngFor="let person of persons">
+          <mat-option [value]="person" *ngIf="person.gender == 'M'">
+            {{person.firstname + ' ' +  person.lastname + ' | ' + person.birthDate}}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Stiefmoeder(s)</mat-label>
+      <mat-select multiple formControlName="stepmothers" [compareWith]="compareCategoryObjects">
+        <div *ngFor="let person of persons">
+          <mat-option [value]="person" *ngIf="person.gender == 'V'">
+            {{person.firstname + ' ' +  person.lastname + ' | ' + person.birthDate}}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Kinderen</mat-label>
+      <mat-select multiple formControlName="children" [compareWith]="compareCategoryObjects">
+        <div *ngFor="let person of persons">
+          <mat-option [value]="person">
+            {{person.firstname + ' ' +  person.lastname + ' | ' + person.birthDate}}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" (click)="editPerson()">Aanpassen</button>
+      <button mat-raised-button color="primary" (click)="clearInput()">Velden leeg maken</button>
+    </div>
+  </form>
+</div>

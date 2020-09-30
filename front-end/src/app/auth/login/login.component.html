@@ -1,0 +1,19 @@
+<div class="card">
+  <h4 class="card-header">Login</h4>
+  <div class="card-body">
+    <form class="example-form" [formGroup]="loginForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Gebruikersnaam</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Wachtwoord</mat-label>
+        <input matInput placeholder="" formControlName="password">
+      </mat-form-field>
+      <div class="example-button-row">
+      <button mat-raised-button color="primary" (click)="login($event)">Login</button>
+      <button mat-raised-button color="primary" (click)="register()">Registreren</button>
+      </div>
+    </form>
+  </div>
+</div>

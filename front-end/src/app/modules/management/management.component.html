@@ -1,0 +1,13 @@
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab *ngFor="let form of forms" [label]=form.label>
+    <mat-card fxFlex="50" *ngIf="form.id === 0">
+      <app-add-new-family></app-add-new-family>
+    </mat-card>
+    <mat-card fxFlex="50" *ngIf="form.id === 1">
+      <app-edit-family></app-edit-family>
+    </mat-card>
+    <mat-card fxFlex="100" *ngIf="form.id === 2">
+      <app-family-in-table></app-family-in-table>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

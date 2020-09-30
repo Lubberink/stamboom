@@ -1,0 +1,17 @@
+.mat-card {
+  vertical-align: top;
+
+}
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+

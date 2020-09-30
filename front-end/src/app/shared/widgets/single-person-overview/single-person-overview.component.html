@@ -1,0 +1,41 @@
+<mat-card>
+<form class="example-form" [formGroup]="editFamily">
+  <mat-form-field class="example-full-width">
+    <input type="text"
+           placeholder="Kies hier iemand"
+           aria-label="Number"
+           matInput
+           formControlName="personToEdit"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (onSelectionChange)="selectedPersonF(option)">
+        {{option.firstname + ' ' + option.lastname + '| geboren: ' + option.birthDate + ' | gemaakt: ' + option.creationDate}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+</mat-card>
+<mat-card fxFlex="25" *ngIf="selectedPerson" class="personalCard">
+  <h2>Persoonlijke informatie</h2>
+  <div *ngFor="let detail of personDetails">
+    {{detail.name + ' : ' + detail.value}}
+  </div>
+  <div *ngIf="selectedPerson.children">
+    <p>Kinderen:</p>
+    <div *ngFor="let child of selectedPerson.children">
+      {{'- ' + child.firstname + ' : ' + child.lastname}}
+    </div>
+  </div>
+  <div *ngIf="selectedPerson.stepfathers">
+    <p>Stiefvader(s):</p>
+    <div *ngFor="let person of selectedPerson.stepfathers">
+      {{'- ' + person.firstname + ' : ' + person.lastname}}
+    </div>
+  </div>
+  <div *ngIf="selectedPerson.stepmothers">
+    <p>Stiefmoeder(s):</p>
+    <div *ngFor="let person of selectedPerson.stepmothers">
+      {{'- ' + person.firstname + ' : ' + person.lastname}}
+    </div>
+  </div>
+</mat-card>
